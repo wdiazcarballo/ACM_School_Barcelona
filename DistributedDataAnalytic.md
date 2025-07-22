@@ -405,17 +405,18 @@ val dataset = spark.read.format("libsvm").load(datafile)
 **Split data for training and testing:**
 ```scala
 val splits = dataset.randomSplit(Array(0.6, 0.4), seed = 11L)
+```
+```scala
 val training = splits(0).cache()
+```
+```scala
 val test = splits(1)
 ```
 *60% for training, 40% for testing, with caching for performance.*
 
 **Configure and train model:**
 ```scala
-val lr = new LinearRegression()
-  .setMaxIter(10)
-  .setRegParam(0.3)
-  .setElasticNetParam(0.8)
+val lr = new LinearRegression().setMaxIter(10).setRegParam(0.3).setElasticNetParam(0.8)
 ```
 *Sets maximum iterations, regularization, and elastic net parameters.*
 
@@ -428,6 +429,8 @@ val model = lr.fit(training)
 **View model parameters:**
 ```scala
 println(s"Coefficients: ${model.coefficients}")
+```
+```scala
 println(s"Intercept: ${model.intercept}")
 ```
 *Displays learned weights and bias.*
