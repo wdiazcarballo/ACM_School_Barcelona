@@ -561,6 +561,8 @@ val dataset = spark.read.format("libsvm").load(datafile)
 **Configure and train k-means:**
 ```scala
 val kmeans = new KMeans().setK(2).setSeed(1L)
+```
+```scala
 val model = kmeans.fit(dataset)
 ```
 *Finds 2 clusters with fixed random seed.*
@@ -574,6 +576,8 @@ model.clusterCenters.foreach(println)
 **Assign clusters:**
 ```scala
 val predictions = model.transform(dataset)
+```
+```scala
 predictions.show()
 ```
 *Shows which cluster each point belongs to.*
@@ -588,6 +592,8 @@ println(s"Silhouette score = $silhouette")
 **Compute within-cluster sum of squares:**
 ```scala
 val WSSSE = model.computeCost(dataset)
+```
+```scala
 println(s"Within Set Sum of Squared Errors = $WSSSE")
 ```
 *Lower WSSSE indicates tighter clusters.*
@@ -595,6 +601,8 @@ println(s"Within Set Sum of Squared Errors = $WSSSE")
 **Save clustering model:**
 ```scala
 model.write.overwrite().save("KMeansModel")
+```
+```scala
 val sameModel = KMeansModel.load("KMeansModel")
 ```
 *Saves cluster definitions for later use.*
@@ -612,18 +620,13 @@ import org.apache.spark.ml.feature.VectorAssembler
 
 **Create sample DataFrame:**
 ```scala
-val dataset = spark.createDataFrame(Seq(
-  (0, 18, 1.0, Vectors.dense(0.0, 10.0, 0.5), 1.0),
-  (1, 19, 2.0, Vectors.dense(1.0, 15.0, 0.5), 0.0)
-)).toDF("id", "hour", "mobile", "userFeatures", "clicked")
+val dataset = spark.createDataFrame(Seq((0, 18, 1.0, Vectors.dense(0.0, 10.0, 0.5), 1.0),(1, 19, 2.0, Vectors.dense(1.0, 15.0, 0.5), 0.0))).toDF("id", "hour", "mobile", "userFeatures", "clicked")
 ```
 *Mixed data with scalars and vectors.*
 
 **Configure vector assembler:**
 ```scala
-val assembler = new VectorAssembler()
-  .setInputCols(Array("hour", "mobile", "userFeatures"))
-  .setOutputCol("features")
+val assembler = new VectorAssembler().setInputCols(Array("hour", "mobile", "userFeatures")).setOutputCol("features")
 ```
 *Combines selected columns into single feature vector.*
 
@@ -636,6 +639,8 @@ val output = assembler.transform(dataset)
 **View results:**
 ```scala
 val vecdf = output.select("features", "clicked")
+```
+```scala
 vecdf.show(truncate = false)
 ```
 *Shows combined feature vectors ready for ML.*
