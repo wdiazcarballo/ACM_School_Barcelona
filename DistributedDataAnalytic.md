@@ -370,17 +370,15 @@ import org.apache.spark.ml.linalg.Vectors
 
 **Create sample data manually:**
 ```scala
-val data = Seq(
-  (Vectors.dense(2.0, 3.0, 5.0), 1.0),
-  (Vectors.dense(4.0, 6.0, 7.0), 2.0),
-  (Vectors.sparse(3, Seq((1, 1.0), (2, 7.0))), 1.5)
-)
+val data = Seq((Vectors.dense(2.0, 3.0, 5.0), 1.0), (Vectors.dense(4.0, 6.0, 7.0), 2.0),(Vectors.sparse(3, Seq((1, 1.0), (2, 7.0))), 1.5))
 ```
 *Creates feature vectors with labels.*
 
 **Convert to DataFrame:**
 ```scala
 val df = data.toDF("features", "weight")
+```
+```scala
 df.show()
 ```
 *Transforms sequence into ML-ready DataFrame.*
