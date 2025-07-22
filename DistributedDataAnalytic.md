@@ -665,26 +665,22 @@ import spark.implicits._
 
 **Create input stream from socket:**
 ```scala
-val lines = spark.readStream
-  .format("socket")
-  .option("host", "localhost")
-  .option("port", 9999)
-  .load()
+val lines = spark.readStream.format("socket").option("host", "localhost").option("port", 9999).load()
 ```
 *Connects to TCP socket for incoming data.*
 
 **Process streaming data:**
 ```scala
 val words = lines.as[String].flatMap(_.split(" "))
+```
+```scala
 val wordCounts = words.groupBy("value").count()
 ```
 *Splits lines into words and counts occurrences.*
 
 **Configure output to console:**
 ```scala
-val query = wordCounts.writeStream
-  .outputMode("complete")
-  .format("console")
+val query = wordCounts.writeStream.outputMode("complete").format("console")
 ```
 *Shows complete word count table after each batch.*
 
@@ -703,9 +699,13 @@ nc -lk 9999
 *Opens socket on port 9999 for sending text.*
 
 **Type words to send:**
-```
+```bash
 hello world
+```
+```bash
 hello spark streaming
+```
+```bash
 world of big data
 ```
 *Each line is processed as a micro-batch.*
@@ -723,21 +723,13 @@ import org.apache.spark.sql.streaming.Trigger
 
 **Create stream with processing time trigger:**
 ```scala
-val query = wordCounts.writeStream
-  .outputMode("complete")
-  .trigger(Trigger.ProcessingTime("5 seconds"))
-  .format("console")
-  .start()
+val query = wordCounts.writeStream.outputMode("complete").trigger(Trigger.ProcessingTime("5 seconds")).format("console").start()
 ```
 *Processes accumulated data every 5 seconds.*
 
 **Use update output mode:**
 ```scala
-val query = wordCounts.writeStream
-  .outputMode("update")
-  .trigger(Trigger.ProcessingTime("5 seconds"))
-  .format("console")
-  .start()
+val query = wordCounts.writeStream.outputMode("update").trigger(Trigger.ProcessingTime("5 seconds")).format("console").start()
 ```
 *Shows only changed counts, not complete table.*
 
