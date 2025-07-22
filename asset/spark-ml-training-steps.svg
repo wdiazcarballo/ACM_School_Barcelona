@@ -1,0 +1,171 @@
+<svg viewBox="0 0 900 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="450" y="30" text-anchor="middle" font-size="26" font-weight="bold" fill="#1a5490">
+    Apache Spark ML Training Workflow - Complete Practicals
+  </text>
+  
+  <!-- Step 1: Load Data -->
+  <g transform="translate(50, 70)">
+    <rect x="0" y="0" width="220" height="100" rx="10" fill="#e3f2fd" stroke="#1976d2" stroke-width="2"/>
+    <text x="110" y="25" text-anchor="middle" font-size="16" font-weight="bold" fill="#1976d2">Step 1: Load Data</text>
+    <text x="110" y="45" text-anchor="middle" font-size="13" fill="#333">spark.read.format("libsvm")</text>
+    <text x="110" y="62" text-anchor="middle" font-size="12" fill="#666">.load(datafile)</text>
+    <text x="110" y="85" text-anchor="middle" font-size="11" font-style="italic" fill="#888">Practicals 9, 10, 11</text>
+  </g>
+  
+  <!-- Arrow 1 -->
+  <path d="M 270 120 L 310 120" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 2: Split Data -->
+  <g transform="translate(320, 70)">
+    <rect x="0" y="0" width="220" height="100" rx="10" fill="#e8f5e9" stroke="#4caf50" stroke-width="2"/>
+    <text x="110" y="25" text-anchor="middle" font-size="16" font-weight="bold" fill="#2e7d32">Step 2: Split Data</text>
+    <text x="110" y="45" text-anchor="middle" font-size="13" fill="#333">randomSplit(Array(0.6, 0.4))</text>
+    <text x="110" y="62" text-anchor="middle" font-size="12" fill="#666">seed = 11L</text>
+    <text x="110" y="85" text-anchor="middle" font-size="11" font-style="italic" fill="#888">60% train / 40% test</text>
+  </g>
+  
+  <!-- Arrow 2 -->
+  <path d="M 540 120 L 580 120" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 3: Create Model -->
+  <g transform="translate(590, 70)">
+    <rect x="0" y="0" width="220" height="100" rx="10" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+    <text x="110" y="25" text-anchor="middle" font-size="16" font-weight="bold" fill="#e65100">Step 3: Create Model</text>
+    <text x="110" y="45" text-anchor="middle" font-size="13" fill="#333">new Algorithm()</text>
+    <text x="110" y="62" text-anchor="middle" font-size="12" fill="#666">.setMaxIter(10)</text>
+    <text x="110" y="85" text-anchor="middle" font-size="11" font-style="italic" fill="#888">.setRegParam(0.1)</text>
+  </g>
+  
+  <!-- Arrow 3 (down) -->
+  <path d="M 700 170 L 700 210" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 4: Train Model -->
+  <g transform="translate(590, 220)">
+    <rect x="0" y="0" width="220" height="100" rx="10" fill="#fce4ec" stroke="#e91e63" stroke-width="2"/>
+    <text x="110" y="25" text-anchor="middle" font-size="16" font-weight="bold" fill="#c2185b">Step 4: Train Model</text>
+    <text x="110" y="45" text-anchor="middle" font-size="13" fill="#333">model = algorithm.fit(training)</text>
+    <text x="110" y="62" text-anchor="middle" font-size="12" fill="#666">training.cache()</text>
+    <text x="110" y="85" text-anchor="middle" font-size="11" font-style="italic" fill="#888">Distributed training</text>
+  </g>
+  
+  <!-- Arrow 4 (left) -->
+  <path d="M 590 270 L 550 270" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 5: Make Predictions -->
+  <g transform="translate(320, 220)">
+    <rect x="0" y="0" width="220" height="100" rx="10" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2"/>
+    <text x="110" y="25" text-anchor="middle" font-size="16" font-weight="bold" fill="#6a1b9a">Step 5: Predict</text>
+    <text x="110" y="45" text-anchor="middle" font-size="13" fill="#333">predictions = </text>
+    <text x="110" y="62" text-anchor="middle" font-size="13" fill="#333">model.transform(test)</text>
+    <text x="110" y="85" text-anchor="middle" font-size="11" font-style="italic" fill="#888">Apply to test set</text>
+  </g>
+  
+  <!-- Arrow 5 (left) -->
+  <path d="M 320 270 L 280 270" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 6: Evaluate -->
+  <g transform="translate(50, 220)">
+    <rect x="0" y="0" width="220" height="100" rx="10" fill="#e0f2f1" stroke="#009688" stroke-width="2"/>
+    <text x="110" y="25" text-anchor="middle" font-size="16" font-weight="bold" fill="#00695c">Step 6: Evaluate</text>
+    <text x="110" y="45" text-anchor="middle" font-size="13" fill="#333">evaluator.evaluate(predictions)</text>
+    <text x="110" y="62" text-anchor="middle" font-size="12" fill="#666">Metrics: accuracy, MSE</text>
+    <text x="110" y="85" text-anchor="middle" font-size="11" font-style="italic" fill="#888">silhouette, WSSSE</text>
+  </g>
+  
+  <!-- Arrow 6 (down) -->
+  <path d="M 160 320 L 160 360" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 7: Save Model -->
+  <g transform="translate(50, 370)">
+    <rect x="0" y="0" width="220" height="100" rx="10" fill="#efebe9" stroke="#795548" stroke-width="2"/>
+    <text x="110" y="25" text-anchor="middle" font-size="16" font-weight="bold" fill="#5d4037">Step 7: Save Model</text>
+    <text x="110" y="45" text-anchor="middle" font-size="13" fill="#333">model.write.overwrite()</text>
+    <text x="110" y="62" text-anchor="middle" font-size="13" fill="#333">.save("Model_Path")</text>
+    <text x="110" y="85" text-anchor="middle" font-size="11" font-style="italic" fill="#888">For reuse later</text>
+  </g>
+  
+  <!-- Optional: Data Preparation -->
+  <g transform="translate(320, 370)">
+    <rect x="0" y="0" width="490" height="100" rx="10" fill="#f5f5f5" stroke="#9e9e9e" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="245" y="25" text-anchor="middle" font-size="16" font-weight="bold" fill="#424242">Optional: Data Preparation (Practical 12)</text>
+    
+    <g transform="translate(20, 40)">
+      <rect x="0" y="0" width="200" height="45" rx="5" fill="#e1f5fe" stroke="#0288d1" stroke-width="1"/>
+      <text x="100" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#01579b">VectorAssembler</text>
+      <text x="100" y="35" text-anchor="middle" font-size="11" fill="#333">Combine columns → vectors</text>
+    </g>
+    
+    <g transform="translate(250, 40)">
+      <rect x="0" y="0" width="200" height="45" rx="5" fill="#fff9c4" stroke="#fbc02d" stroke-width="1"/>
+      <text x="100" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#f57f17">Feature Engineering</text>
+      <text x="100" y="35" text-anchor="middle" font-size="11" fill="#333">Transform raw → features</text>
+    </g>
+  </g>
+  
+  <!-- Algorithm Examples -->
+  <g transform="translate(50, 500)">
+    <rect x="0" y="0" width="760" height="200" rx="10" fill="#fafafa" stroke="#757575" stroke-width="2"/>
+    <text x="380" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#424242">ML Algorithms from Practicals</text>
+    
+    <!-- Linear Regression -->
+    <g transform="translate(20, 50)">
+      <rect x="0" y="0" width="220" height="120" rx="8" fill="#bbdefb" stroke="#1976d2" stroke-width="2"/>
+      <text x="110" y="25" text-anchor="middle" font-size="14" font-weight="bold" fill="#0d47a1">Linear Regression</text>
+      <text x="110" y="40" text-anchor="middle" font-size="11" font-style="italic" fill="#1565c0">Practical 9</text>
+      <line x1="20" y1="50" x2="200" y2="50" stroke="#1976d2" stroke-width="1"/>
+      <text x="110" y="70" text-anchor="middle" font-size="12" fill="#333">new LinearRegression()</text>
+      <text x="110" y="88" text-anchor="middle" font-size="11" fill="#555">.setElasticNetParam(0.8)</text>
+      <text x="110" y="105" text-anchor="middle" font-size="11" fill="#666">Metric: MSE</text>
+    </g>
+    
+    <!-- SVM Classification -->
+    <g transform="translate(270, 50)">
+      <rect x="0" y="0" width="220" height="120" rx="8" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
+      <text x="110" y="25" text-anchor="middle" font-size="14" font-weight="bold" fill="#1b5e20">SVM Classification</text>
+      <text x="110" y="40" text-anchor="middle" font-size="11" font-style="italic" fill="#2e7d32">Practical 10</text>
+      <line x1="20" y1="50" x2="200" y2="50" stroke="#4caf50" stroke-width="1"/>
+      <text x="110" y="70" text-anchor="middle" font-size="12" fill="#333">new LinearSVC()</text>
+      <text x="110" y="88" text-anchor="middle" font-size="11" fill="#555">.setRegParam(0.1)</text>
+      <text x="110" y="105" text-anchor="middle" font-size="11" fill="#666">Metric: Accuracy</text>
+    </g>
+    
+    <!-- K-Means Clustering -->
+    <g transform="translate(520, 50)">
+      <rect x="0" y="0" width="220" height="120" rx="8" fill="#ffccbc" stroke="#ff5722" stroke-width="2"/>
+      <text x="110" y="25" text-anchor="middle" font-size="14" font-weight="bold" fill="#bf360c">K-Means Clustering</text>
+      <text x="110" y="40" text-anchor="middle" font-size="11" font-style="italic" fill="#d84315">Practical 11</text>
+      <line x1="20" y1="50" x2="200" y2="50" stroke="#ff5722" stroke-width="1"/>
+      <text x="110" y="70" text-anchor="middle" font-size="12" fill="#333">new KMeans().setK(2)</text>
+      <text x="110" y="88" text-anchor="middle" font-size="11" fill="#555">.setSeed(1L)</text>
+      <text x="110" y="105" text-anchor="middle" font-size="11" fill="#666">Metrics: Silhouette, WSSSE</text>
+    </g>
+  </g>
+  
+  <!-- Key Parameters Box -->
+  <g transform="translate(50, 720)">
+    <rect x="0" y="0" width="360" height="60" rx="5" fill="#f5f5f5" stroke="#9e9e9e" stroke-width="1"/>
+    <text x="10" y="20" font-size="13" font-weight="bold" fill="#616161">Common Parameters:</text>
+    <text x="10" y="40" font-size="11" fill="#424242">• maxIter: Maximum iterations (default: 10)</text>
+    <text x="10" y="55" font-size="11" fill="#424242">• regParam: Regularization (L2 penalty)</text>
+    <text x="190" y="40" font-size="11" fill="#424242">• seed: Random seed for reproducibility</text>
+    <text x="190" y="55" font-size="11" fill="#424242">• elasticNetParam: L1/L2 mix (0=L2, 1=L1)</text>
+  </g>
+  
+  <!-- Practical References Box -->
+  <g transform="translate(450, 720)">
+    <rect x="0" y="0" width="360" height="60" rx="5" fill="#f5f5f5" stroke="#9e9e9e" stroke-width="1"/>
+    <text x="10" y="20" font-size="13" font-weight="bold" fill="#616161">Complete Workflow Examples:</text>
+    <text x="10" y="40" font-size="11" fill="#424242">• Practical 9: Linear Regression (slides 31-33)</text>
+    <text x="10" y="55" font-size="11" fill="#424242">• Practical 10: SVM Classification (slides 34-36)</text>
+    <text x="190" y="40" font-size="11" fill="#424242">• Practical 11: K-Means (slides 37-38)</text>
+    <text x="190" y="55" font-size="11" fill="#424242">• Practical 12: VectorAssembler (slides 39-40)</text>
+  </g>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+</svg>
