@@ -314,12 +314,7 @@ spark.sql("""
 
 **Multiple aggregations:**
 ```scala
-df.groupBy("DIVISION").agg(
-  count("*").as("count"),
-  avg("SERIALNO").as("avg_serial"),
-  max("PUMA").as("max_puma"),
-  min("PUMA").as("min_puma")
-).show()
+df.groupBy("DIVISION").agg(count("*").as("count"), avg("SERIALNO").as("avg_serial"), max("PUMA").as("max_puma"), min("PUMA").as("min_puma")).show()
 ```
 *Computes multiple statistics per group: count, average, max, and min.*
 
