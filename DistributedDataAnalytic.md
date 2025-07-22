@@ -220,10 +220,7 @@ mkdir hus && mv csv_hus.zip hus/ && cd hus && unzip csv_hus.zip && cd ..
 
 **Load CSV as DataFrame:**
 ```scala
-val df = spark.read.format("csv")
-  .option("inferSchema", true)
-  .option("header", "true")
-  .load("./hus/ss13husa.csv")
+val df = spark.read.format("csv").option("inferSchema", true).option("header", "true").load("./hus/ss13husa.csv")
 ```
 *Reads CSV with automatic schema inference and header row.*
 
