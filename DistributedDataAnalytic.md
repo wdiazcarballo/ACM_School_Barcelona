@@ -1,5 +1,8 @@
 # ACM Summer School 2025 – Day 2 - 22 July 2025 - Morning Session
 
+![Diagram](asset/spark-ml-training-steps.svg)
+
+
 **Distributed Data Analytics in Supercomputing Systems**  
 *Josep Lluís Berral García (CROMAI / Data Centric Computing – UPC/BSC)*
 
