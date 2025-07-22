@@ -790,7 +790,7 @@ nano start-mnv.sh
 **Update user directories in script:**
 ```bash
 HOME_DIR=/home/nct/nctXXXXX/spark_test
-WORK_DIR=/gpfs/scratch/nct_324/nctXXXXX/spark_test
+WORK_DIR=/gpfs/scratch/nct_342/nctXXXXX/spark_test
 ```
 *Replace nctXXXXX with your actual user ID.*
 
