@@ -438,6 +438,8 @@ println(s"Intercept: ${model.intercept}")
 **Make predictions:**
 ```scala
 val predictions = model.transform(test)
+```
+```scala
 predictions.show()
 ```
 *Applies model to test data.*
@@ -445,7 +447,11 @@ predictions.show()
 **Evaluate model performance:**
 ```scala
 val evaluator = new RegressionEvaluator().setMetricName("mse")
+```
+```scala
 val mse = evaluator.evaluate(predictions.select("prediction", "label"))
+```
+```scala
 println(s"Mean Squared Error = $mse")
 ```
 *Computes mean squared error on test set.*
@@ -453,6 +459,8 @@ println(s"Mean Squared Error = $mse")
 **Save and load model:**
 ```scala
 model.write.overwrite().save("LR_Model")
+```
+```scala
 val sameModel = LinearRegressionModel.load("LR_Model")
 ```
 *Persists trained model for future use.*
@@ -472,6 +480,8 @@ import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
 **Load classification data:**
 ```scala
 var datafile = "./sample_libsvm_data.txt"
+```
+```scala
 val dataset = spark.read.format("libsvm").load(datafile)
 ```
 *Reads binary classification dataset.*
@@ -479,16 +489,20 @@ val dataset = spark.read.format("libsvm").load(datafile)
 **Prepare train/test split:**
 ```scala
 val splits = dataset.randomSplit(Array(0.6, 0.4), seed = 11L)
+```
+```scala
 val training = splits(0).cache()
+```
+```scala
 val test = splits(1)
 ```
 *Splits data maintaining class distribution.*
 
 **Configure and train SVM:**
 ```scala
-val lsvc = new LinearSVC()
-  .setMaxIter(10)
-  .setRegParam(0.1)
+val lsvc = new LinearSVC().setMaxIter(10).setRegParam(0.1)
+```
+```scala
 val model = lsvc.fit(training)
 ```
 *Trains linear SVM with regularization.*
@@ -496,15 +510,20 @@ val model = lsvc.fit(training)
 **Generate predictions:**
 ```scala
 val predictions = model.transform(test)
+```
+```scala
 predictions.show()
 ```
 *Classifies test instances.*
 
 **Evaluate accuracy:**
 ```scala
-val evaluator = new MulticlassClassificationEvaluator()
-  .setMetricName("accuracy")
+val evaluator = new MulticlassClassificationEvaluator().setMetricName("accuracy")
+```
+```scala
 val accuracy = evaluator.evaluate(predictions.select("prediction", "label"))
+```
+```scala
 println(s"Test set accuracy = $accuracy")
 ```
 *Measures classification accuracy.*
@@ -512,6 +531,8 @@ println(s"Test set accuracy = $accuracy")
 **Save the model:**
 ```scala
 model.write.overwrite().save("SVM_Model")
+```
+```scala
 val sameModel = LinearSVCModel.load("SVM_Model")
 ```
 *Persists SVM model.*
@@ -531,6 +552,8 @@ import org.apache.spark.ml.evaluation.ClusteringEvaluator
 **Load clustering data:**
 ```scala
 var datafile = "./sample_kmeans_data.txt"
+```
+```scala
 val dataset = spark.read.format("libsvm").load(datafile)
 ```
 *Reads unlabeled data for clustering.*
