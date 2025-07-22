@@ -802,7 +802,7 @@ WORK_DIR=/gpfs/scratch/nct_342/nctXXXXX/spark_test
 
 **Submit job to queue:**
 ```bash
-sbatch -A nct_324 -q gp_training start-mnv.sh
+sbatch -A nct_342 -q gp_training start-mnv.sh
 ```
 *Submits Spark job to the training queue.*
 
