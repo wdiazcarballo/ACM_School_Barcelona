@@ -7,6 +7,8 @@
 
 ---
 
+![Diagram](asset/riscv-instruction-design-tutorial-summary.svg)
+
 ## Table of Contents
 
 1. [Introduction and Motivation](#introduction-and-motivation)
