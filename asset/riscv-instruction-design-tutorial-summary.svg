@@ -1,0 +1,245 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="600" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#1a1a1a">
+    RISC-V ISA Development Framework
+  </text>
+  <text x="600" y="70" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#666">
+    Accelerating Custom Instruction Development
+  </text>
+  
+  <!-- Background sections -->
+  <rect x="20" y="100" width="360" height="680" fill="#f0f8ff" stroke="#4169e1" stroke-width="2" rx="10"/>
+  <rect x="420" y="100" width="360" height="680" fill="#f0fff0" stroke="#228b22" stroke-width="2" rx="10"/>
+  <rect x="820" y="100" width="360" height="680" fill="#fff0f5" stroke="#dc143c" stroke-width="2" rx="10"/>
+  
+  <!-- Section Headers -->
+  <text x="200" y="130" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#4169e1">
+    Phase 1: Compiler
+  </text>
+  <text x="600" y="130" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#228b22">
+    Phase 2: QEMU
+  </text>
+  <text x="1000" y="130" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#dc143c">
+    Phase 3: gem5
+  </text>
+  
+  <!-- Traditional vs New Approach -->
+  <g transform="translate(50, 150)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333">Traditional Approach:</text>
+    <rect x="0" y="10" width="300" height="40" fill="#ffcccc" stroke="#cc0000" stroke-width="1" rx="5"/>
+    <text x="150" y="35" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">
+      All development in gem5 (weeks)
+    </text>
+    
+    <text x="0" y="80" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333">New Approach:</text>
+    <rect x="0" y="90" width="90" height="40" fill="#cce5ff" stroke="#0066cc" stroke-width="1" rx="5"/>
+    <text x="45" y="115" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">Compiler</text>
+    
+    <rect x="105" y="90" width="90" height="40" fill="#ccffcc" stroke="#00cc00" stroke-width="1" rx="5"/>
+    <text x="150" y="115" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">QEMU</text>
+    
+    <rect x="210" y="90" width="90" height="40" fill="#ffccff" stroke="#cc00cc" stroke-width="1" rx="5"/>
+    <text x="255" y="115" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">gem5</text>
+    
+    <!-- Arrows -->
+    <path d="M90 110 L105 110" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <path d="M195 110 L210 110" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  </g>
+  
+  <!-- Speed comparison -->
+  <g transform="translate(450, 150)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333">Simulation Speed:</text>
+    <rect x="0" y="10" width="300" height="120" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="5"/>
+    
+    <text x="10" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">Native: </text>
+    <rect x="70" y="25" width="220" height="15" fill="#00ff00"/>
+    <text x="75" y="37" font-family="Arial, sans-serif" font-size="12" fill="#000">1000 MIPS</text>
+    
+    <text x="10" y="65" font-family="Arial, sans-serif" font-size="14" fill="#333">QEMU: </text>
+    <rect x="70" y="55" width="200" height="15" fill="#90ee90"/>
+    <text x="75" y="67" font-family="Arial, sans-serif" font-size="12" fill="#000">100+ MIPS</text>
+    
+    <text x="10" y="95" font-family="Arial, sans-serif" font-size="14" fill="#333">gem5: </text>
+    <rect x="70" y="85" width="30" height="15" fill="#ffa500"/>
+    <text x="75" y="97" font-family="Arial, sans-serif" font-size="12" fill="#000">0.1 MIPS</text>
+    
+    <text x="10" y="120" font-family="Arial, sans-serif" font-size="12" font-style="italic" fill="#666">
+      1000x difference!
+    </text>
+  </g>
+  
+  <!-- Example Instruction -->
+  <g transform="translate(850, 150)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333">Example: PERM Instruction</text>
+    <rect x="0" y="10" width="300" height="120" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="5"/>
+    
+    <text x="10" y="30" font-family="monospace" font-size="14" fill="#333">perm rd, rs1, rs2</text>
+    <text x="10" y="50" font-family="Arial, sans-serif" font-size="12" fill="#666">rd = rs1! / (rs1-rs2)!</text>
+    
+    <text x="10" y="75" font-family="Arial, sans-serif" font-size="12" fill="#333">Use cases:</text>
+    <text x="20" y="92" font-family="Arial, sans-serif" font-size="11" fill="#666">• Cryptography</text>
+    <text x="20" y="108" font-family="Arial, sans-serif" font-size="11" fill="#666">• Combinatorics</text>
+    <text x="20" y="124" font-family="Arial, sans-serif" font-size="11" fill="#666">• Statistics</text>
+  </g>
+  
+  <!-- Phase 1 Details -->
+  <g transform="translate(40, 320)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#4169e1">Steps:</text>
+    
+    <!-- Step boxes -->
+    <rect x="0" y="15" width="320" height="50" fill="#e6f2ff" stroke="#4169e1" stroke-width="1" rx="5"/>
+    <text x="10" y="35" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">1. Define Encoding</text>
+    <text x="10" y="55" font-family="monospace" font-size="12" fill="#666">31..25=1 14..12=1 6..2=0x0A 1..0=3</text>
+    
+    <rect x="0" y="75" width="320" height="50" fill="#e6f2ff" stroke="#4169e1" stroke-width="1" rx="5"/>
+    <text x="10" y="95" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">2. Generate Headers</text>
+    <text x="10" y="115" font-family="monospace" font-size="12" fill="#666">MATCH_PERM = 0x200102b</text>
+    
+    <rect x="0" y="135" width="320" height="50" fill="#e6f2ff" stroke="#4169e1" stroke-width="1" rx="5"/>
+    <text x="10" y="155" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">3. Modify Toolchain</text>
+    <text x="10" y="175" font-family="Arial, sans-serif" font-size="12" fill="#666">riscv-opc.h, riscv-opc.c</text>
+    
+    <text x="0" y="215" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">Key Files:</text>
+    <text x="10" y="235" font-family="monospace" font-size="12" fill="#666">• opcodes-custom</text>
+    <text x="10" y="252" font-family="monospace" font-size="12" fill="#666">• riscv-opc.h/c</text>
+    <text x="10" y="269" font-family="monospace" font-size="12" fill="#666">• binutils source</text>
+  </g>
+  
+  <!-- Phase 2 Details -->
+  <g transform="translate(440, 320)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#228b22">Steps:</text>
+    
+    <rect x="0" y="15" width="320" height="50" fill="#e6ffe6" stroke="#228b22" stroke-width="1" rx="5"/>
+    <text x="10" y="35" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">1. Add Decode Pattern</text>
+    <text x="10" y="55" font-family="monospace" font-size="12" fill="#666">insn32.decode</text>
+    
+    <rect x="0" y="75" width="320" height="50" fill="#e6ffe6" stroke="#228b22" stroke-width="1" rx="5"/>
+    <text x="10" y="95" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">2. Implement Helper</text>
+    <text x="10" y="115" font-family="monospace" font-size="12" fill="#666">helper_perm(env, rs1, rs2)</text>
+    
+    <rect x="0" y="135" width="320" height="50" fill="#e6ffe6" stroke="#228b22" stroke-width="1" rx="5"/>
+    <text x="10" y="155" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">3. Add Translation</text>
+    <text x="10" y="175" font-family="Arial, sans-serif" font-size="12" fill="#666">TCG intermediate representation</text>
+    
+    <text x="0" y="215" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">Benefits:</text>
+    <text x="10" y="235" font-family="Arial, sans-serif" font-size="12" fill="#666">✓ Fast iteration (seconds)</text>
+    <text x="10" y="252" font-family="Arial, sans-serif" font-size="12" fill="#666">✓ Full system emulation</text>
+    <text x="10" y="269" font-family="Arial, sans-serif" font-size="12" fill="#666">✓ Debugging support</text>
+  </g>
+  
+  <!-- Phase 3 Details -->
+  <g transform="translate(840, 320)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#dc143c">Steps:</text>
+    
+    <rect x="0" y="15" width="320" height="50" fill="#ffe6f0" stroke="#dc143c" stroke-width="1" rx="5"/>
+    <text x="10" y="35" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">1. Extend Decoder</text>
+    <text x="10" y="55" font-family="monospace" font-size="12" fill="#666">decoder.isa</text>
+    
+    <rect x="0" y="75" width="320" height="50" fill="#ffe6f0" stroke="#dc143c" stroke-width="1" rx="5"/>
+    <text x="10" y="95" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">2. Model Microarchitecture</text>
+    <text x="10" y="115" font-family="Arial, sans-serif" font-size="12" fill="#666">Pipeline stages, latencies</text>
+    
+    <rect x="0" y="135" width="320" height="50" fill="#ffe6f0" stroke="#dc143c" stroke-width="1" rx="5"/>
+    <text x="10" y="155" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">3. Performance Analysis</text>
+    <text x="10" y="175" font-family="Arial, sans-serif" font-size="12" fill="#666">IPC, cycle counts, energy</text>
+    
+    <text x="0" y="215" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">Capabilities:</text>
+    <text x="10" y="235" font-family="Arial, sans-serif" font-size="12" fill="#666">• Cycle-accurate simulation</text>
+    <text x="10" y="252" font-family="Arial, sans-serif" font-size="12" fill="#666">• Memory hierarchy modeling</text>
+    <text x="10" y="269" font-family="Arial, sans-serif" font-size="12" fill="#666">• Power estimation</text>
+  </g>
+  
+  <!-- Workflow diagram -->
+  <g transform="translate(50, 620)">
+    <text x="550" y="0" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">
+      Development Workflow
+    </text>
+    
+    <!-- Workflow boxes -->
+    <rect x="0" y="20" width="150" height="60" fill="#ffd700" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="75" y="45" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">
+      Design
+    </text>
+    <text x="75" y="65" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">
+      Identify pattern
+    </text>
+    
+    <rect x="200" y="20" width="150" height="60" fill="#87ceeb" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="275" y="45" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">
+      Implement
+    </text>
+    <text x="275" y="65" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">
+      Compiler + QEMU
+    </text>
+    
+    <rect x="400" y="20" width="150" height="60" fill="#98fb98" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="475" y="45" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">
+      Validate
+    </text>
+    <text x="475" y="65" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">
+      Functional tests
+    </text>
+    
+    <rect x="600" y="20" width="150" height="60" fill="#ffb6c1" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="675" y="45" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">
+      Optimize
+    </text>
+    <text x="675" y="65" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">
+      Software algorithms
+    </text>
+    
+    <rect x="800" y="20" width="150" height="60" fill="#dda0dd" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="875" y="45" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">
+      Evaluate
+    </text>
+    <text x="875" y="65" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">
+      gem5 performance
+    </text>
+    
+    <rect x="1000" y="20" width="150" height="60" fill="#f0e68c" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="1075" y="45" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">
+      Deploy
+    </text>
+    <text x="1075" y="65" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">
+      FPGA/ASIC
+    </text>
+    
+    <!-- Workflow arrows -->
+    <path d="M150 50 L200 50" stroke="#333" stroke-width="3" marker-end="url(#arrowhead2)"/>
+    <path d="M350 50 L400 50" stroke="#333" stroke-width="3" marker-end="url(#arrowhead2)"/>
+    <path d="M550 50 L600 50" stroke="#333" stroke-width="3" marker-end="url(#arrowhead2)"/>
+    <path d="M750 50 L800 50" stroke="#333" stroke-width="3" marker-end="url(#arrowhead2)"/>
+    <path d="M950 50 L1000 50" stroke="#333" stroke-width="3" marker-end="url(#arrowhead2)"/>
+    
+    <!-- Iteration feedback -->
+    <path d="M 875 20 Q 875 -20 475 -20 Q 75 -20 75 20" 
+          stroke="#ff4500" stroke-width="2" fill="none" stroke-dasharray="5,5" marker-end="url(#arrowhead3)"/>
+    <text x="475" y="-25" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#ff4500">
+      Iterate rapidly with QEMU
+    </text>
+  </g>
+  
+  <!-- Key insights box -->
+  <g transform="translate(50, 720)">
+    <rect x="0" y="0" width="1100" height="50" fill="#fffacd" stroke="#ffd700" stroke-width="2" rx="5"/>
+    <text x="550" y="20" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#333">
+      Key Insight
+    </text>
+    <text x="550" y="40" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#666">
+      Separate functional correctness (QEMU) from performance analysis (gem5) to accelerate development by 10-100x
+    </text>
+  </g>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#333"/>
+    </marker>
+    <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#333"/>
+    </marker>
+    <marker id="arrowhead3" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#ff4500"/>
+    </marker>
+  </defs>
+</svg>
