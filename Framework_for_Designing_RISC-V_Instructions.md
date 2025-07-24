@@ -201,7 +201,7 @@ https://leap.hpc-ignite.org
 ```
 Select "Terminal Center" and launch the ISCA 2024 terminal.
 
-![Diagram](asset/Screenshot 2025-07-24 225549.png)
+![Terminal Launcher]("asset/Screenshot 2025-07-24 225549.png")
 Using the provided Docker image (recommended):
 
 ```bash
