@@ -2,10 +2,12 @@
 
 ## ACM Europe Summer School on HPC Computer Architectures for AI and Dedicated Applications
 
-### Authors: Andrea Bartolini, Giacomo Madella, Emanuele Venieri
+### The tutorial summarised from the materials of the Authors: Andrea Bartolini, Giacomo Madella, Emanuele Venieri
 ### Department of Electrical, Electronic, and Information Engineering "Guglielmo Marconi"
 
 ---
+![Diagram](asset/riscv-hpc-summary-svg.svg)
+
 
 ## Table of Contents
 
