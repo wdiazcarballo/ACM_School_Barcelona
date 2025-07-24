@@ -1,0 +1,248 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="600" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#1a1a1a">
+    RISC-V HPC Performance Optimization
+  </text>
+  <text x="600" y="65" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#666">
+    Monte Cimone Infrastructure - Key Concepts
+  </text>
+  
+  <!-- Main sections -->
+  
+  <!-- 1. Infrastructure Overview -->
+  <g transform="translate(50, 100)">
+    <rect x="0" y="0" width="250" height="180" rx="10" fill="#e3f2fd" stroke="#1976d2" stroke-width="2"/>
+    <text x="125" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#1976d2">
+      Infrastructure
+    </text>
+    
+    <!-- Monte Cimone -->
+    <rect x="20" y="50" width="210" height="50" rx="5" fill="#bbdefb"/>
+    <text x="125" y="70" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Monte Cimone Cluster</text>
+    <text x="125" y="88" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">x86 Login Node</text>
+    
+    <!-- Partitions -->
+    <rect x="20" y="110" width="95" height="50" rx="5" fill="#90caf9"/>
+    <text x="67.5" y="130" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">BLADE</text>
+    <text x="67.5" y="145" font-family="Arial, sans-serif" font-size="10" text-anchor="middle">Dual Socket</text>
+    <text x="67.5" y="155" font-family="Arial, sans-serif" font-size="10" text-anchor="middle">128 cores</text>
+    
+    <rect x="135" y="110" width="95" height="50" rx="5" fill="#90caf9"/>
+    <text x="182.5" y="130" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">MILKV</text>
+    <text x="182.5" y="145" font-family="Arial, sans-serif" font-size="10" text-anchor="middle">Single Socket</text>
+    <text x="182.5" y="155" font-family="Arial, sans-serif" font-size="10" text-anchor="middle">64 cores</text>
+  </g>
+  
+  <!-- 2. SLURM Commands -->
+  <g transform="translate(330, 100)">
+    <rect x="0" y="0" width="250" height="180" rx="10" fill="#e8f5e9" stroke="#388e3c" stroke-width="2"/>
+    <text x="125" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#388e3c">
+      SLURM Job Management
+    </text>
+    
+    <!-- Commands -->
+    <text x="20" y="55" font-family="monospace" font-size="12" fill="#2e7d32">squeue -u user</text>
+    <text x="150" y="55" font-family="Arial, sans-serif" font-size="10" fill="#666">View jobs</text>
+    
+    <text x="20" y="75" font-family="monospace" font-size="12" fill="#2e7d32">sbatch script.sh</text>
+    <text x="150" y="75" font-family="Arial, sans-serif" font-size="10" fill="#666">Submit batch</text>
+    
+    <text x="20" y="95" font-family="monospace" font-size="12" fill="#2e7d32">srun --pty bash</text>
+    <text x="150" y="95" font-family="Arial, sans-serif" font-size="10" fill="#666">Interactive</text>
+    
+    <text x="20" y="115" font-family="monospace" font-size="12" fill="#2e7d32">scancel jobid</text>
+    <text x="150" y="115" font-family="Arial, sans-serif" font-size="10" fill="#666">Cancel job</text>
+    
+    <text x="20" y="135" font-family="monospace" font-size="12" fill="#2e7d32">sinfo -N -l</text>
+    <text x="150" y="135" font-family="Arial, sans-serif" font-size="10" fill="#666">Node info</text>
+    
+    <text x="20" y="155" font-family="monospace" font-size="12" fill="#2e7d32">salloc -N 2</text>
+    <text x="150" y="155" font-family="Arial, sans-serif" font-size="10" fill="#666">Allocate nodes</text>
+  </g>
+  
+  <!-- 3. Performance Benchmarks -->
+  <g transform="translate(610, 100)">
+    <rect x="0" y="0" width="250" height="180" rx="10" fill="#fff3e0" stroke="#f57c00" stroke-width="2"/>
+    <text x="125" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#f57c00">
+      Performance Benchmarks
+    </text>
+    
+    <!-- STREAM -->
+    <rect x="20" y="50" width="210" height="55" rx="5" fill="#ffe0b2"/>
+    <text x="125" y="70" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">STREAM</text>
+    <text x="125" y="85" font-family="Arial, sans-serif" font-size="11" text-anchor="middle">Memory Bandwidth (MB/s)</text>
+    <text x="125" y="98" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#666">COPY, SCALE, ADD, TRIAD</text>
+    
+    <!-- HPL -->
+    <rect x="20" y="115" width="210" height="55" rx="5" fill="#ffe0b2"/>
+    <text x="125" y="135" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">HPL (Linpack)</text>
+    <text x="125" y="150" font-family="Arial, sans-serif" font-size="11" text-anchor="middle">Compute Performance (GFLOPS)</text>
+    <text x="125" y="163" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#666">Dense Linear Algebra</text>
+  </g>
+  
+  <!-- 4. Vector Extensions -->
+  <g transform="translate(890, 100)">
+    <rect x="0" y="0" width="280" height="180" rx="10" fill="#fce4ec" stroke="#c2185b" stroke-width="2"/>
+    <text x="140" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#c2185b">
+      RISC-V Vector (XTheadVector)
+    </text>
+    
+    <!-- Vector params -->
+    <text x="20" y="55" font-family="Arial, sans-serif" font-size="12" fill="#880e4f">VLEN = 128 bits</text>
+    <text x="150" y="55" font-family="Arial, sans-serif" font-size="10" fill="#666">Vector register length</text>
+    
+    <text x="20" y="75" font-family="Arial, sans-serif" font-size="12" fill="#880e4f">SEW = {8,16,32,64}</text>
+    <text x="150" y="75" font-family="Arial, sans-serif" font-size="10" fill="#666">Element width</text>
+    
+    <text x="20" y="95" font-family="Arial, sans-serif" font-size="12" fill="#880e4f">LMUL = {1,2,4,8}</text>
+    <text x="150" y="95" font-family="Arial, sans-serif" font-size="10" fill="#666">Length multiplier</text>
+    
+    <rect x="20" y="110" width="240" height="25" rx="5" fill="#f8bbd0"/>
+    <text x="140" y="127" font-family="monospace" font-size="11" text-anchor="middle">vlmax = VLEN × LMUL / SEW</text>
+    
+    <text x="20" y="155" font-family="Arial, sans-serif" font-size="11" fill="#880e4f">Example: float32, LMUL=8</text>
+    <text x="20" y="170" font-family="Arial, sans-serif" font-size="11" fill="#666">vlmax = 128×8/32 = 32 elements</text>
+  </g>
+  
+  <!-- 5. Optimization Workflow -->
+  <g transform="translate(50, 320)">
+    <rect x="0" y="0" width="1100" height="200" rx="10" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="2"/>
+    <text x="550" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#7b1fa2">
+      Optimization Workflow
+    </text>
+    
+    <!-- Step boxes -->
+    <!-- Step 1 -->
+    <g transform="translate(50, 60)">
+      <rect x="0" y="0" width="180" height="100" rx="8" fill="#e1bee7"/>
+      <text x="90" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">1. Baseline</text>
+      <text x="90" y="45" font-family="Arial, sans-serif" font-size="11" text-anchor="middle">Scalar implementation</text>
+      <text x="90" y="60" font-family="Arial, sans-serif" font-size="11" text-anchor="middle">Verify correctness</text>
+      <text x="90" y="75" font-family="Arial, sans-serif" font-size="11" text-anchor="middle">Measure performance</text>
+      <text x="90" y="90" font-family="monospace" font-size="10" text-anchor="middle" fill="#666">perf stat ./app</text>
+    </g>
+    
+    <!-- Arrow -->
+    <path d="M 280 110 L 320 110" stroke="#7b1fa2" stroke-width="3" marker-end="url(#arrowhead)"/>
+    
+    <!-- Step 2 -->
+    <g transform="translate(320, 60)">
+      <rect x="0" y="0" width="180" height="100" rx="8" fill="#e1bee7"/>
+      <text x="90" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">2. Profile</text>
+      <text x="90" y="45" font-family="Arial, sans-serif" font-size="11" text-anchor="middle">Identify hotspots</text>
+      <text x="90" y="60" font-family="Arial, sans-serif" font-size="11" text-anchor="middle">Check memory patterns</text>
+      <text x="90" y="75" font-family="Arial, sans-serif" font-size="11" text-anchor="middle">Analyze bottlenecks</text>
+      <text x="90" y="90" font-family="monospace" font-size="10" text-anchor="middle" fill="#666">perf record/report</text>
+    </g>
+    
+    <!-- Arrow -->
+    <path d="M 550 110 L 590 110" stroke="#7b1fa2" stroke-width="3" marker-end="url(#arrowhead)"/>
+    
+    <!-- Step 3 -->
+    <g transform="translate(590, 60)">
+      <rect x="0" y="0" width="180" height="100" rx="8" fill="#e1bee7"/>
+      <text x="90" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">3. Vectorize</text>
+      <text x="90" y="45" font-family="Arial, sans-serif" font-size="11" text-anchor="middle">Use intrinsics</text>
+      <text x="90" y="60" font-family="Arial, sans-serif" font-size="11" text-anchor="middle">Handle remainders</text>
+      <text x="90" y="75" font-family="Arial, sans-serif" font-size="11" text-anchor="middle">Verify results</text>
+      <text x="90" y="90" font-family="monospace" font-size="10" text-anchor="middle" fill="#666">-march=rv64gc_xtheadvector</text>
+    </g>
+    
+    <!-- Arrow -->
+    <path d="M 820 110 L 860 110" stroke="#7b1fa2" stroke-width="3" marker-end="url(#arrowhead)"/>
+    
+    <!-- Step 4 -->
+    <g transform="translate(860, 60)">
+      <rect x="0" y="0" width="180" height="100" rx="8" fill="#e1bee7"/>
+      <text x="90" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">4. Scale</text>
+      <text x="90" y="45" font-family="Arial, sans-serif" font-size="11" text-anchor="middle">Test parallelism</text>
+      <text x="90" y="60" font-family="Arial, sans-serif" font-size="11" text-anchor="middle">Find saturation point</text>
+      <text x="90" y="75" font-family="Arial, sans-serif" font-size="11" text-anchor="middle">Optimize for target</text>
+      <text x="90" y="90" font-family="monospace" font-size="10" text-anchor="middle" fill="#666">sbatch -N nodes</text>
+    </g>
+  </g>
+  
+  <!-- 6. Key Intrinsics -->
+  <g transform="translate(50, 550)">
+    <rect x="0" y="0" width="530" height="220" rx="10" fill="#e8eaf6" stroke="#3f51b5" stroke-width="2"/>
+    <text x="265" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#3f51b5">
+      Essential Vector Intrinsics
+    </text>
+    
+    <!-- Intrinsic examples -->
+    <rect x="20" y="50" width="490" height="30" rx="5" fill="#c5cae9"/>
+    <text x="30" y="69" font-family="monospace" font-size="11">vl = __riscv_vsetvlmax_e32m8();</text>
+    <text x="350" y="69" font-family="Arial, sans-serif" font-size="10" fill="#666">// Set max vector length</text>
+    
+    <rect x="20" y="85" width="490" height="30" rx="5" fill="#c5cae9"/>
+    <text x="30" y="104" font-family="monospace" font-size="11">vec = __riscv_vle32_v_f32m8(ptr, vl);</text>
+    <text x="350" y="104" font-family="Arial, sans-serif" font-size="10" fill="#666">// Load vector</text>
+    
+    <rect x="20" y="120" width="490" height="30" rx="5" fill="#c5cae9"/>
+    <text x="30" y="139" font-family="monospace" font-size="11">res = __riscv_vfmacc_vv_f32m8(acc, a, b, vl);</text>
+    <text x="350" y="139" font-family="Arial, sans-serif" font-size="10" fill="#666">// FMA operation</text>
+    
+    <rect x="20" y="155" width="490" height="30" rx="5" fill="#c5cae9"/>
+    <text x="30" y="174" font-family="monospace" font-size="11">sum = __riscv_vfredosum_vs_f32m8_f32m1(...);</text>
+    <text x="350" y="174" font-family="Arial, sans-serif" font-size="10" fill="#666">// Reduction</text>
+    
+    <rect x="20" y="190" width="490" height="30" rx="5" fill="#c5cae9"/>
+    <text x="30" y="209" font-family="monospace" font-size="11">__riscv_vse32_v_f32m8(ptr, vec, vl);</text>
+    <text x="350" y="209" font-family="Arial, sans-serif" font-size="10" fill="#666">// Store vector</text>
+  </g>
+  
+  <!-- 7. Performance Tips -->
+  <g transform="translate(610, 550)">
+    <rect x="0" y="0" width="560" height="220" rx="10" fill="#efebe9" stroke="#5d4037" stroke-width="2"/>
+    <text x="280" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#5d4037">
+      Performance Best Practices
+    </text>
+    
+    <!-- Tips list -->
+    <g transform="translate(20, 50)">
+      <!-- Memory -->
+      <circle cx="10" cy="10" r="4" fill="#5d4037"/>
+      <text x="25" y="14" font-family="Arial, sans-serif" font-size="12">Memory Access: Prefer stride-1 (contiguous) access patterns</text>
+      
+      <!-- Vectorization -->
+      <circle cx="10" cy="35" r="4" fill="#5d4037"/>
+      <text x="25" y="39" font-family="Arial, sans-serif" font-size="12">Vectorization: Use largest LMUL that fits your working set</text>
+      
+      <!-- Saturation -->
+      <circle cx="10" cy="60" r="4" fill="#5d4037"/>
+      <text x="25" y="64" font-family="Arial, sans-serif" font-size="12">Scaling: Find memory bandwidth saturation point (typically 8-16 cores)</text>
+      
+      <!-- Cache -->
+      <circle cx="10" cy="85" r="4" fill="#5d4037"/>
+      <text x="25" y="89" font-family="Arial, sans-serif" font-size="12">Cache: Block algorithms to fit in L1/L2 cache when possible</text>
+      
+      <!-- Balance -->
+      <circle cx="10" cy="110" r="4" fill="#5d4037"/>
+      <text x="25" y="114" font-family="Arial, sans-serif" font-size="12">Balance: Match compute intensity with memory bandwidth</text>
+      
+      <!-- Debug -->
+      <circle cx="10" cy="135" r="4" fill="#5d4037"/>
+      <text x="25" y="139" font-family="Arial, sans-serif" font-size="12">Debug: Always verify correctness before optimizing performance</text>
+      
+      <!-- Measure -->
+      <circle cx="10" cy="160" r="4" fill="#5d4037"/>
+      <text x="25" y="164" font-family="Arial, sans-serif" font-size="12">Measure: Use perf tools to validate optimization impact</text>
+    </g>
+  </g>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7b1fa2"/>
+    </marker>
+  </defs>
+  
+  <!-- Connection lines showing relationships -->
+  <path d="M 175 280 L 175 320" stroke="#999" stroke-width="2" stroke-dasharray="5,5"/>
+  <path d="M 455 280 L 455 320" stroke="#999" stroke-width="2" stroke-dasharray="5,5"/>
+  <path d="M 735 280 L 735 320" stroke="#999" stroke-width="2" stroke-dasharray="5,5"/>
+  <path d="M 1030 280 L 1030 320" stroke="#999" stroke-width="2" stroke-dasharray="5,5"/>
+</svg>
