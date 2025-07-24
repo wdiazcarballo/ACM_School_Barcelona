@@ -278,6 +278,8 @@ The `riscv-opcodes` tool automates encoding generation:
 
 ```bash
 $ cd riscv-opcodes
+```
+```bash
 $ vim opcodes-custom
 ```
 
