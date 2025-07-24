@@ -20,6 +20,8 @@
 
 ---
 
+![Diagram](asset/riscv-hpc-summary-svg.svg)
+
 ## Introduction
 
 This tutorial provides a comprehensive guide to performance optimization on RISC-V HPC systems, specifically focusing on the Monte Cimone infrastructure. Learners will explore how to:
