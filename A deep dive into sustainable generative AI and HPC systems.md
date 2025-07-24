@@ -2,12 +2,10 @@
 
 ## ACM Europe Summer School on HPC Computer Architectures for AI and Dedicated Applications
 
-### The tutorial summarised from the materials of the Authors: Andrea Bartolini, Giacomo Madella, Emanuele Venieri
+### Based on materials by: Andrea Bartolini, Giacomo Madella, Emanuele Venieri
 ### Department of Electrical, Electronic, and Information Engineering "Guglielmo Marconi"
 
 ---
-![Diagram](asset/riscv-hpc-summary-svg.svg)
-
 
 ## Table of Contents
 
@@ -24,7 +22,7 @@
 
 ## Introduction
 
-This tutorial provides a comprehensive guide to performance optimization on RISC-V HPC systems, specifically focusing on the Monte Cimone infrastructure. You'll learn how to:
+This tutorial provides a comprehensive guide to performance optimization on RISC-V HPC systems, specifically focusing on the Monte Cimone infrastructure. Learners will explore how to:
 
 - Navigate and utilize a RISC-V-based HPC cluster
 - Run performance benchmarks to understand system capabilities
@@ -71,29 +69,29 @@ Dual Socket        Single Socket
 
 ### Connecting to Monte Cimone
 
-To access the cluster, you'll use SSH (Secure Shell) protocol. The connection requires a specific port number (2223) and your assigned username.
+To access the cluster, SSH (Secure Shell) protocol is used. The connection requires a specific port number (2223) and an assigned username.
 
-**Windows users**: Use PowerShell, Command Prompt, or PuTTY
+**Windows users**: PowerShell, Command Prompt, or PuTTY can be used
 ```bash
 ssh -p 2223 acm-hpc-XX@delta.dei.unibo.it
 ```
 
-**Linux/Mac users**: Use the Terminal application
+**Linux/Mac users**: The Terminal application is used
 ```bash
 ssh -p 2223 acm-hpc-XX@delta.dei.unibo.it
 ```
 
 **Tips**:
-- Replace `XX` with your assigned user number (00-69)
+- XX should be replaced with the assigned user number (00-69)
 - The `-p 2223` flag specifies the non-standard SSH port
-- You'll be prompted for your password (provided by instructors)
-- If you see a host key verification message, type "yes" to continue
+- A password prompt will appear (provided by instructors)
+- If a host key verification message appears, "yes" should be typed to continue
 
-**First-time setup**: After logging in, change your password for security
+**First-time setup**: After logging in, the password should be changed for security
 ```bash
 yppasswd
 ```
-This command updates your password in the Yellow Pages (NIS) system used by the cluster.
+This command updates the password in the Yellow Pages (NIS) system used by the cluster.
 
 ---
 
@@ -103,14 +101,14 @@ SLURM (Simple Linux Utility for Resource Management) orchestrates job scheduling
 
 ### Essential SLURM Commands
 
-**View your job queue**: Check the status of your submitted jobs
+**View job queue**: Check the status of submitted jobs
 ```bash
 squeue -u <username>
 ```
 **Tips**: 
 - Shows job ID, partition, name, user, state, time, and nodes
 - States include: PD (pending), R (running), CG (completing)
-- Add `-l` for long format with more details
+- `-l` can be added for long format with more details
 
 **Check cluster status**: View information about available nodes and partitions
 ```bash
@@ -119,7 +117,7 @@ sinfo -N -l
 **Tips**:
 - `-N` shows node-oriented view
 - `-l` provides detailed information including memory, CPUs, and state
-- Look for "idle" nodes when planning large jobs
+- "idle" nodes should be identified when planning large jobs
 
 **Submit a batch job**: Queue a job script for later execution
 ```bash
@@ -145,9 +143,9 @@ srun -N 1 --ntasks-per-node=1 --pty /bin/bash -l
 scancel <job_id>
 ```
 **Tips**:
-- Use `squeue -u $USER` to find job IDs
-- Can cancel multiple jobs: `scancel job1 job2 job3`
-- No confirmation prompt - be careful!
+- `squeue -u $USER` can be used to find job IDs
+- Multiple jobs can be cancelled: `scancel job1 job2 job3`
+- No confirmation prompt appears - caution is advised
 
 **Allocate resources**: Reserve nodes for multiple commands
 ```bash
@@ -155,7 +153,7 @@ salloc -N 2 --ntasks-per-node=4 -t 01:00:00
 ```
 **Tips**:
 - Creates a shell with allocated resources
-- Run multiple `srun` commands within this allocation
+- Multiple `srun` commands can be run within this allocation
 - Exit with `exit` or Ctrl+D to release resources
 - Useful for iterative development and testing
 
@@ -168,7 +166,7 @@ srun -N 1 --ntasks-per-node=1 --pty /bin/bash -l
 **Tips**:
 - Default partition is "blade" (dual-socket nodes)
 - Ideal for initial code testing and debugging
-- Job starts immediately if resources available
+- Job starts immediately if resources are available
 
 **Run on RISC-V partition**: Access to Milk-V Pioneer nodes
 ```bash
@@ -176,7 +174,7 @@ srun -N 1 --ntasks-per-node=1 -p milkv --pty /bin/bash -l
 ```
 **Tips**:
 - `-p milkv` specifies the RISC-V partition
-- Single-socket nodes with 64 cores max
+- Single-socket nodes with 64 cores maximum
 - Better for production runs of RISC-V optimized code
 
 **Request multiple cores**: For parallel testing
@@ -184,15 +182,15 @@ srun -N 1 --ntasks-per-node=1 -p milkv --pty /bin/bash -l
 srun -N 1 --ntasks-per-node=8 -p milkv --pty /bin/bash -l
 ```
 **Tips**:
-- Adjust `--ntasks-per-node` based on your parallel needs
+- `--ntasks-per-node` should be adjusted based on parallel needs
 - Maximum: 128 for blade, 64 for milkv
-- Use `nproc` inside the job to verify allocated cores
+- `nproc` can be used inside the job to verify allocated cores
 
 ### Batch Jobs with SBATCH
 
-Create a job script that defines resource requirements and commands to execute. Here's a complete example:
+A job script defines resource requirements and commands to execute. Here's a complete example:
 
-**Create the script file** (save as `myjob.sh`):
+**Create the script file** (saved as `myjob.sh`):
 ```bash
 #!/usr/bin/bash
 #SBATCH --job-name=mytest
@@ -207,12 +205,12 @@ Create a job script that defines resource requirements and commands to execute. 
 echo "Job started on $(hostname)"
 echo "Running with $SLURM_NTASKS tasks"
 
-# Your application commands here
+# Application commands go here
 srun ./my_application
 ```
 
 **Key SBATCH directives explained**:
-- `--job-name`: Identifies your job in queue listings
+- `--job-name`: Identifies the job in queue listings
 - `--output/--error`: Redirect stdout/stderr to files (default: slurm-%j.out)
 - `--nodes`: Number of compute nodes needed
 - `--ntasks-per-node`: Processes per node (consider cores available)
@@ -231,8 +229,8 @@ sbatch myjob.sh
 ```
 **Tips**:
 - Returns immediately with "Submitted batch job <jobid>"
-- Use the job ID to track progress with `squeue`
-- Check output files after completion
+- The job ID can be used to track progress with `squeue`
+- Output files should be checked after completion
 
 **Monitor job progress**:
 ```bash
@@ -245,7 +243,7 @@ tail -f job.out
 ```
 **Tips**:
 - `-f` follows the file as it grows
-- Press Ctrl+C to stop following
+- Ctrl+C stops following
 - Works for both stdout and stderr files
 
 ---
@@ -287,12 +285,12 @@ sbatch ./stream.sh
 ```bash
 nano stream.sh
 ```
-Look for the line `#SBATCH --ntasks-per-node=X` and change X to test different core counts (1, 2, 4, 8, 16, 32, 64).
+The line `#SBATCH --ntasks-per-node=X` should be found and X changed to test different core counts (1, 2, 4, 8, 16, 32, 64).
 
 **Tips**:
 - Save with Ctrl+O, exit with Ctrl+X in nano
-- Test powers of 2 for clear scaling patterns
-- Keep other parameters constant for valid comparison
+- Powers of 2 should be tested for clear scaling patterns
+- Other parameters should remain constant for valid comparison
 
 **Check job status**:
 ```bash
@@ -304,13 +302,13 @@ squeue -u $USER
 cat logs/stream.out
 ```
 **Tips**:
-- Look for the "TRIAD" bandwidth - it's the most representative
+- The "TRIAD" bandwidth is most representative
 - Results are in MB/s (megabytes per second)
-- Higher is better, but watch for saturation
+- Higher values indicate better performance, but saturation should be watched for
 
 #### Analyzing Results
 
-Create a simple scaling analysis by collecting results:
+A simple scaling analysis can be created by collecting results:
 
 **Extract bandwidth values**:
 ```bash
@@ -318,10 +316,10 @@ grep "Triad:" logs/stream.out | awk '{print $2}'
 ```
 
 **Tips for analysis**:
-- Plot bandwidth (y-axis) vs. core count (x-axis)
+- Bandwidth (y-axis) vs. core count (x-axis) should be plotted
 - Bandwidth should increase then plateau
-- Saturation point indicates memory controller limits
-- Typical saturation: 8-16 cores on modern systems
+- The saturation point indicates memory controller limits
+- Typical saturation occurs at 8-16 cores on modern systems
 
 ### HPL: High-Performance Linpack
 
@@ -545,7 +543,7 @@ cp stream.sh stream_test.sh
 ```bash
 nano stream_test.sh
 ```
-Change the line `#SBATCH --ntasks-per-node=X` where X is your test value.
+The line `#SBATCH --ntasks-per-node=X` should be changed where X is the test value.
 
 **Recommended test sequence**: 1, 2, 4, 8, 16, 32, 64 cores
 
@@ -554,8 +552,8 @@ Change the line `#SBATCH --ntasks-per-node=X` where X is your test value.
 sbatch stream_test.sh
 ```
 **Tips**:
-- Wait for each job to complete before modifying for next test
-- Rename output files to preserve results: `mv logs/stream.out logs/stream_Xcore.out`
+- Each job should complete before modifying for the next test
+- Output files should be renamed to preserve results: `mv logs/stream.out logs/stream_Xcore.out`
 
 **Step 5 - Collect all results**:
 ```bash
@@ -574,7 +572,7 @@ done
 - Memory bandwidth typically saturates at 8-16 cores
 - Bandwidth per core decreases as core count increases
 - Understanding saturation helps optimize parallel applications
-- Use fewer cores than saturation point for memory-bound applications
+- Fewer cores than the saturation point should be used for memory-bound applications
 
 ### Exercise 2: Computational Performance Scaling
 
@@ -648,7 +646,7 @@ module load gcc-14.2.0
 ```
 **Tips**: 
 - This loads GCC 14.2 with RISC-V vector support
-- Use `module list` to verify it's loaded
+- `module list` can be used to verify it's loaded
 - Required for XTheadVector intrinsics
 
 **Step 2 - Navigate to exercise directory**:
@@ -661,9 +659,9 @@ cd ~/mc-hands-on/ex2
 cat dotp.c
 ```
 **Tips**:
-- Look for `golden_dotp()` - the reference implementation
-- Find `intrinsics_dotp()` - the vectorized version
-- Note the intrinsic function patterns
+- `golden_dotp()` is the reference implementation
+- `intrinsics_dotp()` is the vectorized version
+- The intrinsic function patterns should be noted
 
 **Step 4 - Compile the dot product example**:
 ```bash
@@ -679,8 +677,8 @@ gcc dotp.c -O3 -march=rv64gc_xtheadvector -o dotp
 perf stat ./dotp
 ```
 **Tips**:
-- Compare "cycles" between scalar and vector versions
-- Look for reduced instruction count in vector version
+- "cycles" between scalar and vector versions should be compared
+- Reduced instruction count should be observed in vector version
 - "branches" should be significantly lower
 
 **Step 6 - Open the matrix-vector exercise**:
@@ -692,40 +690,40 @@ nano matvec.c
 ```c
 void intrinsics_matvec(int m, int n, float *A, 
                        float *x, float *y) {
-    // Hint: Process each row with vector operations
-    // Use the dot product pattern from dotp.c
+    // Hint: Each row should be processed with vector operations
+    // The dot product pattern from dotp.c should be used
     // Remember: A is row-major, size m×n
 }
 ```
 
 **Implementation tips**:
-- Outer loop over rows (m iterations)
-- Inner loop uses vector operations like in dot product
-- Each row of A times vector x gives one element of y
-- Don't forget to handle remainder elements
+- Outer loop iterates over rows (m iterations)
+- Inner loop uses vector operations similar to dot product
+- Each row of A multiplied by vector x produces one element of y
+- Remainder elements must be handled
 
-**Step 8 - Compile your implementation**:
+**Step 8 - Compile the implementation**:
 ```bash
 gcc matvec.c -O3 -march=rv64gc_xtheadvector -o matvec
 ```
 
-**Step 9 - Test your implementation**:
+**Step 9 - Test the implementation**:
 ```bash
 ./matvec
 ```
 **Success indicators**:
-- "Results match!" message
-- Performance improvement over scalar version
-- No segmentation faults
+- "Results match!" message appears
+- Performance improvement over scalar version is shown
+- No segmentation faults occur
 
 **Step 10 - Verify vectorization**:
 ```bash
 objdump -d matvec | grep -E "vle|vse|vfmacc" | head -20
 ```
 **Tips**:
-- Should see vector load (vle), store (vse), and arithmetic instructions
+- Vector load (vle), store (vse), and arithmetic instructions should appear
 - If empty, vectorization may have failed
-- Check compiler warnings for hints
+- Compiler warnings should be checked for hints
 
 ---
 
@@ -733,15 +731,15 @@ objdump -d matvec | grep -E "vle|vse|vfmacc" | head -20
 
 ### 1. Memory Access Patterns
 
-- **Stride-1 access**: Always prefer contiguous memory access
-- **Cache blocking**: Tile computations to fit in cache
+- **Stride-1 access**: Contiguous memory access should always be preferred
+- **Cache blocking**: Computations should be tiled to fit in cache
 - **Prefetching**: RISC-V supports software prefetch hints
 
 ### 2. Vector Programming Guidelines
 
-- **Maximize vector length**: Use largest LMUL that fits your data
-- **Minimize vector configuration changes**: Group similar operations
-- **Consider alignment**: Aligned loads/stores are faster
+- **Maximize vector length**: The largest LMUL that fits the data should be used
+- **Minimize vector configuration changes**: Similar operations should be grouped
+- **Consider alignment**: Aligned loads/stores perform faster
 
 ### 3. Performance Analysis
 
@@ -750,7 +748,7 @@ objdump -d matvec | grep -E "vle|vse|vfmacc" | head -20
 perf stat -e cycles,instructions,cache-misses ./application
 ```
 **Tips**:
-- `cycles`: Total CPU cycles (lower is better)
+- `cycles`: Total CPU cycles (lower values indicate better performance)
 - `instructions`: Total instructions executed
 - `cache-misses`: Memory access efficiency indicator
 - IPC (instructions/cycle) > 1 indicates good performance
@@ -762,8 +760,8 @@ objdump -d application | grep -E "v[ls]e|vf"
 **Tips**:
 - `vle*/vse*`: Vector load/store instructions
 - `vf*`: Vector floating-point operations
-- No output means no vectorization detected
-- Use with `| head -50` to see first occurrences
+- No output indicates no vectorization detected
+- `| head -50` can be used to see first occurrences
 
 **Profile with detailed events**:
 ```bash
@@ -771,24 +769,24 @@ perf record ./application
 perf report
 ```
 **Navigation tips**:
-- Use arrow keys to navigate
-- Press Enter to drill down into functions
-- Press 'q' to quit
-- Look for hotspots (high percentage functions)
+- Arrow keys navigate the interface
+- Enter drills down into functions
+- 'q' quits the report
+- Hotspots (high percentage functions) should be identified
 
 ### 4. Debugging Tips
 
 - Start with scalar implementation
-- Verify correctness before optimizing
-- Use small problem sizes for debugging
-- Compare results with golden reference
+- Correctness should be verified before optimizing
+- Small problem sizes facilitate debugging
+- Results should be compared with golden reference
 
 ### 5. Resource Utilization
 
-- Monitor with `squeue` and `sinfo`
-- Request only needed resources
-- Use appropriate partition (blade vs milkv)
-- Consider job arrays for parameter sweeps
+- Job status should be monitored with `squeue` and `sinfo`
+- Only needed resources should be requested
+- Appropriate partition (blade vs milkv) should be selected
+- Job arrays can be considered for parameter sweeps
 
 ---
 
