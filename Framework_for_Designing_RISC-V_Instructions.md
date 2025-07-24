@@ -215,11 +215,6 @@ $ docker pull isabenders/isca24-tutorial:latest
 
 # Start interactive session
 $ docker run -it isabenders/isca24-tutorial:latest
-
-# Verify tools are available
-$ riscv64-unknown-linux-gnu-gcc --version
-$ qemu-riscv64 --version
-$ gem5.opt --version
 ```
 
 Manual setup requires building each tool from source - see appendix for details.
@@ -289,10 +284,10 @@ Source Code (.c) → Compiler → Assembly (.s) → Assembler → Object (.o) �
 The `riscv-opcodes` tool automates encoding generation:
 
 ```bash
-$ cd riscv-opcodes
+cd riscv-opcodes
 ```
 ```bash
-$ vim opcodes-custom
+vim opcodes-custom
 ```
 
 Add instruction definition:
@@ -310,8 +305,10 @@ Breaking down the encoding:
 
 Generate headers:
 ```bash
-$ make
-$ grep -n "perm" encoding.out.h
+make
+```
+```bash
+grep -n "perm" encoding.out.h
 ```
 
 Output:
