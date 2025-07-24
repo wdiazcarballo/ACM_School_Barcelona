@@ -195,6 +195,13 @@ Students should be familiar with:
 
 ### Environment Setup
 
+Using the web-based terminal (for ACM Summer School Students):
+```url
+https://leap.hpc-ignite.org
+```
+Select "Terminal Center" and launch the ISCA 2024 terminal.
+
+![Diagram](asset/Screenshot 2025-07-24 225549.png)
 Using the provided Docker image (recommended):
 
 ```bash
