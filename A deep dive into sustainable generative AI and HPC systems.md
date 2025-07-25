@@ -121,7 +121,7 @@ sinfo -N -l
 - `-l` provides detailed information including memory, CPUs, and state
 - "idle" nodes should be identified when planning large jobs
 
-## Example output
+#### Example output
 ```bash
 acm-hpc-11@mcimone-login$ ~ sinfo -N -l
 Fri Jul 25 14:18:37 2025
@@ -184,7 +184,7 @@ srun -N 1 --ntasks-per-node=1 --pty /bin/bash -l
 - Ideal for initial code testing and debugging
 - Job starts immediately if resources are available
 
-## Example output: 
+#### Example output: 
 
 ```bash
 acm-hpc-11@mcimone-login$ ~ srun -N 1 --ntasks-per-node=1 --pty /bin/bash -l
@@ -214,7 +214,7 @@ srun -N 1 --ntasks-per-node=1 -p milkv --pty /bin/bash -l
 - Single-socket nodes with 64 cores maximum
 - Better for production runs of RISC-V optimized code
 
-## Example output:
+#### Example output:
 
 ```bash
 acm-hpc-11@mcimone-login$ ~ srun -N 1 --ntasks-per-node=1 -p milkv --pty /bin/bash -l
@@ -383,10 +383,69 @@ STREAM measures sustainable memory bandwidth and corresponding computation rates
 | TRIAD | a[i] = b[i] + q*c[i] | 24 | 2 |
 
 #### Running STREAM
+**Exploring the exercise directory**:
+```bash
+acm-hpc-11@mcimone-login$ ~ tree mc-hands-on/
+mc-hands-on/
+├── ex1
+│   ├── bin
+│   │   ├── HPL_1c.dat
+│   │   ├── HPL_4c.dat
+│   │   ├── HPL_64c.dat
+│   │   ├── HPL.dat
+│   │   ├── stream_dram
+│   │   ├── stream_l1
+│   │   └── xhpl_blis
+│   ├── hpl_1c.sh
+│   ├── hpl_4c.sh
+│   ├── logs
+│   └── stream.sh
+└── ex2
+    ├── dotp.c
+    └── matvec.c
+
+4 directories, 12 files
+```
 
 **Navigate to the exercise directory**:
 ```bash
 cd ~/mc-hands-on/ex1
+```
+
+**Look at the job script**
+```bash
+cat stream.sh
+```
+**Example output:**
+```bash
+acm-hpc-11@mcimone-login$ ~ cd mc-hands-on/ex1
+acm-hpc-11@mcimone-login$ ~/mc-hands-on/ex1 cat stream.sh
+#!/usr/bin/env bash
+#SBATCH --job-name=stream               # job name
+##SBATCH --mem=2000                     # memory required per node
+#SBATCH --nodes=1                       # number of nodes required
+#SBATCH --ntasks-per-node=32            # processes per node
+##SBATCH --exclusive                    # no share node with other jobs
+#SBATCH --time=12:00:00                 # maximum time required
+#SBATCH --output=./logs/stream.out      # output file name
+##SBATCH --error=./logs/stream.err      # output file name
+
+## quickly fail in case of errors
+set -euo pipefail
+
+## go to the STREAM binary folder
+cd ~/mc-hands-on/ex1/bin
+
+## Change me to vary the number of OMP Threads
+## enable OpenMP threads
+export OMP_NUM_THREADS=$SLURM_NTASKS
+
+echo "****************** OMP_NUM_THREADS = ${OMP_NUM_THREADS} *******************"
+## execute the command
+##Precompiled
+#./stream_l1
+./stream_dram
+
 ```
 
 **Submit the STREAM benchmark job**:
