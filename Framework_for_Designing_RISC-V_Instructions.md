@@ -219,6 +219,18 @@ $ docker run -it isabenders/isca24-tutorial:latest
 
 Manual setup requires building each tool from source - see appendix for details.
 
+#### Verify tools are available
+```bash
+riscv64-unknown-linux-gnu-gcc --version
+```
+```bash
+qemu-riscv64 --version
+```
+```bash
+gem5.opt --version
+```
+
+
 ---
 
 ## Example: Implementing a Permutation Instruction
