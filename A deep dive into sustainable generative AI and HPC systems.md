@@ -121,6 +121,20 @@ sinfo -N -l
 - `-l` provides detailed information including memory, CPUs, and state
 - "idle" nodes should be identified when planning large jobs
 
+## Example output
+```bash
+acm-hpc-11@mcimone-login$ ~ sinfo -N -l
+Fri Jul 25 14:18:37 2025
+NODELIST    NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT AVAIL_FE REASON                     
+mc-blade-1      1    blade*        idle 128   1:128:1 256000        0      1   (null) none                       
+mc-blade-2      1    blade*        idle 128   1:128:1 256000        0      1   (null) none                       
+mc-blade-3      1    blade*        idle 128   1:128:1 256000        0      1   (null) none                       
+mc-blade-4      1    blade*        idle 128   1:128:1 256000        0      1   (null) none                       
+mc-milkv-1      1     milkv        idle 64     1:64:1 128000        0      1   (null) none                       
+mc-milkv-2      1     milkv        idle 64     1:64:1 128000        0      1   (null) none                       
+mc-milkv-3      1     milkv        idle 64     1:64:1 128000        0      1   (null) none  
+```
+
 **Submit a batch job**: Queue a job script for later execution
 ```bash
 sbatch <job_script>
