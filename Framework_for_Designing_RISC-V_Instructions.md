@@ -211,10 +211,10 @@ cd /home
 
 ```bash
 # Pull the pre-configured environment
-$ docker pull isabenders/isca24-tutorial:latest
+docker pull isabenders/isca24-tutorial:latest
 
 # Start interactive session
-$ docker run -it isabenders/isca24-tutorial:latest
+docker run -it isabenders/isca24-tutorial:latest
 ```
 
 Manual setup requires building each tool from source - see appendix for details.
@@ -383,8 +383,10 @@ Field explanations:
 ### Step 1.3: Rebuild Toolchain
 
 ```bash
-$ cd build
-$ make -j$(nproc)
+cd build
+```
+```
+make -j$(nproc)
 ```
 
 ### Step 1.4: Test Assembly
@@ -401,8 +403,10 @@ _start:
 
 Assemble and verify:
 ```bash
-$ riscv64-unknown-linux-gnu-as test.s -o test.o
-$ riscv64-unknown-linux-gnu-objdump -d test.o
+riscv64-unknown-linux-gnu-as test.s -o test.o
+```
+```bash
+riscv64-unknown-linux-gnu-objdump -d test.o
 ```
 
 ---
@@ -425,7 +429,7 @@ TCG (Tiny Code Generator) is QEMU's intermediate representation.
 
 Navigate to RISC-V target:
 ```bash
-$ cd qemu/target/riscv/
+cd qemu/target/riscv/
 ```
 
 Key files:
@@ -512,9 +516,14 @@ target_ulong helper_perm(CPURISCVState *env, target_ulong n, target_ulong r)
 ### Step 2.7: Build and Test
 
 ```bash
-$ cd ../../..
-$ ./configure --target-list=riscv64-linux-user
-$ make -j$(nproc)
+cd ../../..
+```
+```bash
+./configure --target-list=riscv64-linux-user
+```
+```bash
+make -j$(nproc)
+```
 
 # Test with a simple program
 $ cat > test_perm.c << EOF
@@ -550,7 +559,7 @@ Instruction Fetch → Decode → Rename → Issue → Execute → Writeback → 
 
 Navigate to RISC-V ISA:
 ```bash
-$ cd gem5/src/arch/riscv/isa
+cd /home/gem5/src/arch/riscv/isa
 ```
 
 Key files:
@@ -615,8 +624,8 @@ def format PermOp(code, *flags) {{
 ### Step 3.5: Build gem5
 
 ```bash
-$ cd ../../../..
-$ scons build/RISCV/gem5.opt -j$(nproc)
+cd ../../../..
+scons build/RISCV/gem5.opt -j$(nproc)
 ```
 
 ### Step 3.6: Create Configuration Script
@@ -672,7 +681,7 @@ print('Exiting @ tick {} because {}'
 ### Step 3.7: Run Simulation
 
 ```bash
-$ build/RISCV/gem5.opt configs/example/perm_test.py
+build/RISCV/gem5.opt configs/example/perm_test.py
 ```
 
 ---
@@ -746,12 +755,13 @@ $ riscv64-unknown-linux-gnu-gdb test_perm
 ```
 
 #### Gem5 Debugging
+##### Enable debug flags
 ```bash
-# Enable debug flags
-$ gem5.opt --debug-flags=Decode,Exec configs/example/perm_test.py
-
-# Instruction trace
-$ gem5.opt --debug-flags=ExecAll --debug-file=exec.trace
+gem5.opt --debug-flags=Decode,Exec configs/example/perm_test.py
+```
+##### Instruction trace
+```bash
+gem5.opt --debug-flags=ExecAll --debug-file=exec.trace
 ```
 
 ---
