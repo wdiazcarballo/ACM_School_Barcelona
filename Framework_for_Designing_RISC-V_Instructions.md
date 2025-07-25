@@ -335,7 +335,7 @@ MASK_PERM = 0xfe00707f = 1111111 00000 00000 111 00000 1111111
 
 Navigate to the toolchain:
 ```bash
-$ cd ../riscv-gnu-toolchain
+cd ../riscv-gnu-toolchain
 ```
 
 Four files need modification:
