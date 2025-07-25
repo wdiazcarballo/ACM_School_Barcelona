@@ -184,6 +184,27 @@ srun -N 1 --ntasks-per-node=1 --pty /bin/bash -l
 - Ideal for initial code testing and debugging
 - Job starts immediately if resources are available
 
+## Example output: 
+
+```bash
+acm-hpc-11@mcimone-login$ ~ srun -N 1 --ntasks-per-node=1 --pty /bin/bash -l
+acm-hpc-11@mc-blade-1$ ~ lscpu
+Architecture:          riscv64
+  Byte Order:          Little Endian
+CPU(s):                128
+  On-line CPU(s) list: 0-127
+NUMA:
+  NUMA node(s):        8
+  NUMA node0 CPU(s):   0-7,16-23
+  NUMA node1 CPU(s):   8-15,24-31
+  NUMA node2 CPU(s):   32-39,48-55
+  NUMA node3 CPU(s):   40-47,56-63
+  NUMA node4 CPU(s):   64-71,80-87
+  NUMA node5 CPU(s):   72-79,88-95
+  NUMA node6 CPU(s):   96-103,112-119
+  NUMA node7 CPU(s):   104-111,120-127
+```
+
 **Run on RISC-V partition**: Access to Milk-V Pioneer nodes
 ```bash
 srun -N 1 --ntasks-per-node=1 -p milkv --pty /bin/bash -l
@@ -192,6 +213,23 @@ srun -N 1 --ntasks-per-node=1 -p milkv --pty /bin/bash -l
 - `-p milkv` specifies the RISC-V partition
 - Single-socket nodes with 64 cores maximum
 - Better for production runs of RISC-V optimized code
+
+## Example output:
+
+```bash
+acm-hpc-11@mcimone-login$ ~ srun -N 1 --ntasks-per-node=1 -p milkv --pty /bin/bash -l
+acm-hpc-11@mc-milkv-1$ ~ lscpu
+Architecture:          riscv64
+  Byte Order:          Little Endian
+CPU(s):                64
+  On-line CPU(s) list: 0-63
+NUMA:
+  NUMA node(s):        4
+  NUMA node0 CPU(s):   0-7,16-23
+  NUMA node1 CPU(s):   8-15,24-31
+  NUMA node2 CPU(s):   32-39,48-55
+  NUMA node3 CPU(s):   40-47,56-63
+```
 
 **Request multiple cores**: For parallel testing
 ```bash
