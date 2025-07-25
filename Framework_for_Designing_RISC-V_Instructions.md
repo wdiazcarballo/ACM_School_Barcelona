@@ -363,13 +363,17 @@ Insert these lines:
 /* Permutation instruction */
 #define MATCH_PERM 0x200102b
 #define MASK_PERM  0xfe00707f
-...
+```
+Then go down in the file locate the space to put this code:
+```c
 DECLARE_INSN(perm, MATCH_PERM, MASK_PERM)
 ```
 
 #### 2. Opcode tables (riscv-opc.c)
-
-Add to `binutils/opcodes/riscv-opc.c`:
+```bash
+ vim binutils/opcodes/riscv-opc.c
+```
+Add to `binutils/opcodes/riscv-opc.c, looking for the const struct riscv_opcode[] = ... and add one more opcode
 ```c
 /* name,    xlen, isa,          operands,     match,      mask,       match_func,    pinfo */
 {"perm",    0,    INSN_CLASS_I, "d,s,t",      MATCH_PERM, MASK_PERM,  match_opcode,  0},
