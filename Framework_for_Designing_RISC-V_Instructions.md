@@ -343,6 +343,10 @@ Four files need modification:
 #### 1. Header files (riscv-opc.h)
 
 Add to `binutils/include/opcode/riscv-opc.h`:
+```bash
+vim binutils/include/opcode/riscv-opc.h
+```
+Insert these lines:
 ```c
 /* Permutation instruction */
 #define MATCH_PERM 0x200102b
