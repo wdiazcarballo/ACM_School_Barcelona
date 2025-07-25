@@ -387,9 +387,9 @@ Field explanations:
 ### Step 1.3: Rebuild Toolchain
 
 ```bash
-cd build
+cd /home/riscv-gnu-toolchain
 ```
-```
+```bash
 make -j$(nproc)
 ```
 
