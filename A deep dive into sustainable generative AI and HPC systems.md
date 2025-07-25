@@ -240,6 +240,69 @@ srun -N 1 --ntasks-per-node=8 -p milkv --pty /bin/bash -l
 - Maximum: 128 for blade, 64 for milkv
 - `nproc` can be used inside the job to verify allocated cores
 
+### Run a simple Hello_world interactively
+#### Load the compiler
+```bash
+ml openmpi
+```
+#### create a source code file
+```bash
+nano hello_mpi.c
+```
+
+```c
+#include <mpi.h>
+#include <stdio.h>
+
+int main(int argc, char** argv) {
+    // Initialize MPI environment
+    MPI_Init(&argc, &argv);
+
+    // Get total number of processes
+    int world_size;
+    MPI_Comm_size(MPI_COMM_WORLD, &world_size);
+
+    // Get the rank of the process
+    int world_rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
+
+    // Get the name of the processor
+    char processor_name[MPI_MAX_PROCESSOR_NAME];
+    int name_len;
+    MPI_Get_processor_name(processor_name, &name_len);
+
+    // Print Hello World message
+    printf("Hello world from processor %s, rank %d out of %d processors\n",
+           processor_name, world_rank, world_size);
+
+    // Finalize the MPI environment
+    MPI_Finalize();
+    return 0;
+}
+```
+```bash
+mpicc hello_mpi.c -o hello_mpi
+```
+#### Run the workload
+```bash
+mpirun hello
+```
+#### Example output:
+```bash
+acm-hpc-11@mc-milkv-1$ ~ ml openmpi
+acm-hpc-11@mc-milkv-1$ ~ nano hello_mpi.c
+acm-hpc-11@mc-milkv-1$ ~ mpicc hello_mpi.c -o hello_mpi
+acm-hpc-11@mc-milkv-1$ ~ mpirun ./hello_mpi
+Hello world from processor mc-milkv-1, rank 6 out of 8 processors
+Hello world from processor mc-milkv-1, rank 7 out of 8 processors
+Hello world from processor mc-milkv-1, rank 1 out of 8 processors
+Hello world from processor mc-milkv-1, rank 2 out of 8 processors
+Hello world from processor mc-milkv-1, rank 0 out of 8 processors
+Hello world from processor mc-milkv-1, rank 3 out of 8 processors
+Hello world from processor mc-milkv-1, rank 4 out of 8 processors
+Hello world from processor mc-milkv-1, rank 5 out of 8 processors
+```
+
 ### Batch Jobs with SBATCH
 
 A job script defines resource requirements and commands to execute. Here's a complete example:
